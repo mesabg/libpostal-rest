@@ -21,8 +21,8 @@ type Request struct {
 
 type ParserRequest struct {
 	Query *string `json:"query"`
-	Language *string `json:"query"`
-	Country *string `json:"query"`
+	Language *string `json:"language"`
+	Country *string `json:"country"`
 }
 
 func main() {
