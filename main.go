@@ -19,6 +19,12 @@ type Request struct {
 	Query string `json:"query"`
 }
 
+type ParserRequest struct {
+	Query string `json:"query"`
+	Language string `json:"query"`
+	Country string `json:"query"`
+}
+
 func main() {
 	host := os.Getenv("LISTEN_HOST")
 	if host == "" {
@@ -81,7 +87,7 @@ func ExpandHandler(w http.ResponseWriter, r *http.Request) {
 func ParserHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	var req Request
+	var req ParserRequest
 
 	q, _ := ioutil.ReadAll(r.Body)
 	json.Unmarshal(q, &req)
