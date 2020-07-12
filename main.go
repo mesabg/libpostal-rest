@@ -93,7 +93,7 @@ func ParserHandler(w http.ResponseWriter, r *http.Request) {
 	json.Unmarshal(q, &req)
 
 	if req.Language != nil && req.Country != nil {
-		parsed := parser.ParseAddress(*req.Query, parser.AddressParserOptions{*req.Language, *req.Country})
+		parsed := parser.ParseAddressOptions(*req.Query, parser.ParserOptions{*req.Language, *req.Country})
 		parseThing, _ := json.Marshal(parsed)
 		w.Write(parseThing)
 	} else {
