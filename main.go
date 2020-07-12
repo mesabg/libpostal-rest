@@ -20,9 +20,9 @@ type Request struct {
 }
 
 type ParserRequest struct {
-	Query string `json:"query"`
-	Language string `json:"query"`
-	Country string `json:"query"`
+	Query *string `json:"query"`
+	Language *string `json:"query"`
+	Country *string `json:"query"`
 }
 
 func main() {
@@ -93,11 +93,11 @@ func ParserHandler(w http.ResponseWriter, r *http.Request) {
 	json.Unmarshal(q, &req)
 
 	if req.Language != nil && req.Country != nil {
-		parsed := parser.ParseAddress(req.Query, parser.AddressParserOptions{req.Language, req.Country})
+		parsed := parser.ParseAddress(*req.Query, parser.AddressParserOptions{*req.Language, *req.Country})
 		parseThing, _ := json.Marshal(parsed)
 		w.Write(parseThing)
 	} else {
-		parsed := parser.ParseAddress(req.Query)
+		parsed := parser.ParseAddress(*req.Query)
 		parseThing, _ := json.Marshal(parsed)
 		w.Write(parseThing)
 	}
